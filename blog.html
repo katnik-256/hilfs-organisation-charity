@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HILFS CHARITY · blog + gallery sync | modern interactive</title>
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Google Font: Inter (modern) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* color palette (dark green, light green, white) */
+        :root {
+            --dark-green: #1e4a3b;
+            --medium-green: #2e6b4e;
+            --light-green: #b7d9b1;
+            --pure-white: #ffffff;
+            --off-white: #f4faf0;
+            --text-dark: #1d352a;
+            --shadow-sm: 0 12px 28px -8px rgba(30,74,59,0.12);
+            --card-hover: 0 25px 35px -12px #1e4a3b40;
+        }
+
+        body {
+            background-color: var(--off-white);
+            color: var(--text-dark);
+            line-height: 1.5;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 32px;
+        }
+
+        /* navigation (same style, consistent) */
+        .navbar {
+            background-color: var(--pure-white);
+            box-shadow: var(--shadow-sm);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(4px);
+            background-color: rgba(255,255,255,0.95);
+        }
+        .nav-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            padding: 12px 0;
+        }
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+        .logo-img {
+            width: 58px;
+            height: 58px;
+            background: var(--dark-green);
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 16px;
+            color: var(--light-green);
+            border: 3px solid var(--light-green);
+            box-shadow: 0 6px 0 var(--medium-green);
+            text-align: center;
+            line-height: 1.2;
+        }
+        .logo-text h2 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--dark-green);
+        }
+        .logo-text p {
+            font-size: 0.7rem;
+            letter-spacing: 2.5px;
+            color: var(--medium-green);
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        .nav-links a {
+            text-decoration: none;
+            font-weight: 600;
+            color: #2b4a3a;
+            transition: 0.2s;
+            font-size: 0.95rem;
+            border-bottom: 2px solid transparent;
+            padding: 4px 0;
+        }
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--dark-green);
+            border-bottom-color: var(--light-green);
+        }
+        .donate-nav-btn {
+            background-color: var(--dark-green);
+            color: white !important;
+            padding: 8px 24px !important;
+            border-radius: 40px;
+            font-weight: 700;
+            border-bottom: none !important;
+            box-shadow: 0 4px 0 #0e2b21;
+        }
+        .donate-nav-btn:hover {
+            background-color: var(--medium-green);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 0 #0e2b21;
+        }
+        .menu-toggle {
+            display: none;
+            font-size: 1.8rem;
+            color: var(--dark-green);
+            cursor: pointer;
+        }
+
+        /* blog header */
+        .blog-header {
+            padding: 60px 0 30px;
+            background: var(--pure-white);
+            border-bottom: 2px solid var(--light-green);
+        }
+        .blog-header h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--dark-green);
+        }
+        .blog-header .light-tag {
+            color: var(--medium-green);
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            font-size: 0.85rem;
+        }
+
+        /* admin post creator - interactive */
+        .admin-creator {
+            background: var(--pure-white);
+            border-radius: 60px 20px 60px 20px;
+            padding: 30px 35px;
+            margin: 40px 0;
+            box-shadow: var(--shadow-sm);
+            border: 3px solid var(--light-green);
+        }
+        .admin-creator h2 {
+            color: var(--dark-green);
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .admin-creator h2 i {
+            color: var(--light-green);
+            background: var(--dark-green);
+            padding: 12px;
+            border-radius: 50%;
+        }
+        .form-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            align-items: flex-end;
+        }
+        .form-group {
+            flex: 1 1 200px;
+        }
+        .form-group label {
+            font-weight: 600;
+            color: var(--dark-green);
+            display: block;
+            margin-bottom: 8px;
+        }
+        .form-group input, .form-group textarea, .form-group select {
+            width: 100%;
+            padding: 15px 20px;
+            border-radius: 50px;
+            border: 2px solid var(--light-green);
+            font-size: 1rem;
+            outline: none;
+            transition: 0.2s;
+            background: var(--off-white);
+        }
+        .form-group input:focus, .form-group textarea:focus {
+            border-color: var(--dark-green);
+        }
+        .form-group textarea {
+            border-radius: 30px;
+            resize: vertical;
+        }
+        .post-btn {
+            background: var(--dark-green);
+            color: white;
+            border: none;
+            padding: 16px 38px;
+            border-radius: 60px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            box-shadow: 0 8px 0 #0a2b1f;
+            transition: 0.15s;
+            margin-top: 20px;
+        }
+        .post-btn:hover {
+            background: var(--medium-green);
+            transform: translateY(-3px);
+            box-shadow: 0 11px 0 #0a2b1f;
+        }
+
+        /* blog posts grid */
+        .blog-posts-section {
+            padding: 30px 0 60px;
+        }
+        .posts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+        .blog-card {
+            background: var(--pure-white);
+            border-radius: 40px 16px 40px 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: 0.25s;
+            border: 2px solid transparent;
+        }
+        .blog-card:hover {
+            border-color: var(--light-green);
+            transform: translateY(-8px);
+            box-shadow: var(--card-hover);
+        }
+        .blog-image {
+            width: 100%;
+            aspect-ratio: 16/11;
+            background-color: #cde2c4;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+        .blog-category {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: var(--dark-green);
+            color: var(--light-green);
+            padding: 6px 18px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.8rem;
+            border: 2px solid var(--light-green);
+        }
+        .blog-content {
+            padding: 24px;
+        }
+        .blog-meta {
+            display: flex;
+            justify-content: space-between;
+            color: var(--medium-green);
+            font-size: 0.85rem;
+            margin-bottom: 8px;
+        }
+        .blog-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--dark-green);
+            margin-bottom: 10px;
+        }
+        .blog-excerpt {
+            color: #3a5847;
+            margin-bottom: 20px;
+        }
+        .read-more {
+            background: transparent;
+            border: 2px solid var(--light-green);
+            color: var(--dark-green);
+            padding: 8px 22px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .read-more:hover {
+            background: var(--light-green);
+            color: var(--dark-green);
+        }
+
+        /* mini gallery preview (synced) */
+        .live-gallery-preview {
+            background: var(--pure-white);
+            border-radius: 50px 20px 50px 20px;
+            padding: 40px;
+            margin: 40px 0;
+            border: 3px solid var(--light-green);
+        }
+        .preview-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin: 30px 0 10px;
+        }
+        .preview-item {
+            aspect-ratio: 1/1;
+            background: #cbe5c0;
+            border-radius: 24px 8px 24px 8px;
+            background-size: cover;
+            background-position: center;
+            border: 3px solid var(--light-green);
+            transition: 0.2s;
+        }
+        .preview-item:hover {
+            transform: scale(1.02);
+            border-color: var(--dark-green);
+        }
+
+        .footer {
+            background: var(--dark-green);
+            color: var(--light-green);
+            padding: 40px 0;
+            border-top: 8px solid var(--light-green);
+        }
+        .social-row a {
+            background: var(--pure-white);
+            color: var(--dark-green);
+            width: 52px; height: 52px;
+            border-radius: 30px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            box-shadow: 0 6px 0 var(--light-green);
+            margin: 0 5px;
+        }
+        @media (max-width: 900px) {
+            .nav-links { display: none; flex-direction: column; width: 100%; }
+            .nav-links.show { display: flex; }
+            .menu-toggle { display: block; }
+            .preview-grid { grid-template-columns: repeat(2,1fr); }
+        }
+        .active-blog {
+            border-bottom-color: var(--light-green) !important;
+            color: var(--dark-green) !important;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container nav-container">
+            <div class="logo-area">
+                <div class="logo-img"><span>+256<br>782<br>575<br>225</span></div>
+                <div class="logo-text"><h2>HILFS</h2><p>charity organisation</p></div>
+            </div>
+            <div class="menu-toggle" id="menuToggle"><i class="fas fa-bars"></i></div>
+            <div class="nav-links" id="navLinks">
+                <a href="index.html">HOME</a>
+                <a href="about.html">ABOUT US</a>
+                <a href="activity.html">ACTIVITIES</a>
+                <a href="contact.html">CONTACT</a>
+                <a href="gallery.html">GALLERY</a>
+                <a href="blog.html" class="active-blog">BLOG</a>
+                <a href="donate.html" class="donate-nav-btn">DONATE</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="blog-header">
+        <div class="container">
+            <div class="light-tag">INSIGHTS & UPDATES</div>
+            <h1>Our blog <span style="color: var(--light-green); background: var(--dark-green); padding: 0 12px; border-radius: 60px;">+ gallery sync</span></h1>
+        </div>
+    </div>
+
+    <main class="container">
+        <!-- Admin / user post creator (interactive) -->
+        <div class="admin-creator" id="postCreator">
+            <h2><i class="fas fa-feather"></i> Create new post (admin)</h2>
+            <div class="form-row">
+                <div class="form-group" style="flex:2">
+                    <label>📷 Image URL (use any image link)</label>
+                    <input type="text" id="imgUrl" placeholder="https://picsum.photos/400/300?random=1" value="https://picsum.photos/400/300?random=42">
+                </div>
+                <div class="form-group">
+                    <label>📁 Category</label>
+                    <select id="categorySelect">
+                        <option value="Orphan feeding">Orphan feeding</option>
+                        <option value="Water wells">Water wells</option>
+                        <option value="Mosque">Mosque</option>
+                        <option value="School">School</option>
+                        <option value="Kurban">Kurban</option>
+                        <option value="Iftar">Iftar</option>
+                        <option value="Zakat">Zakat</option>
+                        <option value="Clothes">Clothes</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group" style="flex:2">
+                    <label>📰 Title</label>
+                    <input type="text" id="postTitle" placeholder="e.g., New water well in Karamoja" value="New water well in Karamoja">
+                </div>
+                <div class="form-group" style="flex:1">
+                    <label>📍 Location / date</label>
+                    <input type="text" id="postMeta" placeholder="Mar 2025, Uganda" value="Mar 2025, Uganda">
+                </div>
+            </div>
+            <div class="form-group">
+                <label>📝 Excerpt</label>
+                <textarea id="postExcerpt" rows="2">Clean water now serves 800 people. Thanks to donors.</textarea>
+            </div>
+            <button class="post-btn" id="publishBtn"><i class="fas fa-cloud-upload-alt"></i> Publish — syncs to blog, gallery & homepage</button>
+            <p style="margin-top: 12px; color: var(--medium-green);"><i class="fas fa-sync"></i> New post appears below, in the live gallery preview, and would update homepage gallery (simulated).</p>
+        </div>
+
+        <!-- Live blog posts grid (dynamic) -->
+        <section class="blog-posts-section">
+            <h2 style="font-size: 2.2rem; color: var(--dark-green); margin-bottom: 10px;">📰 Latest stories</h2>
+            <div class="posts-grid" id="blogPostsContainer">
+                <!-- initial posts will be injected via JS -->
+            </div>
+        </section>
+
+        <!-- Live gallery preview (synced from blog images) -->
+        <div class="live-gallery-preview">
+            <h2 style="color: var(--dark-green); display: flex; align-items: center; gap: 10px;"><i class="fas fa-images" style="color: var(--light-green);"></i> Gallery preview (auto‑sync)</h2>
+            <div class="preview-grid" id="galleryPreviewGrid">
+                <!-- dynamically filled from blog images -->
+            </div>
+            <p style="text-align: right;"><i class="fas fa-arrow-right"></i> These images also appear on the homepage gallery section (simulated).</p>
+        </div>
+
+        <!-- social links same as always -->
+        <div style="display: flex; gap: 20px; justify-content: center; margin: 40px 0;">
+            <a href="#" class="social-icon" style="background:white; width:52px; height:52px; border-radius:30px; display:flex; align-items:center; justify-content:center; font-size:1.6rem; color:var(--dark-green); box-shadow:0 6px 0 var(--light-green);"><i class="fab fa-whatsapp"></i></a>
+            <a href="#" class="social-icon" style="background:white; width:52px; height:52px; border-radius:30px; display:flex; align-items:center; justify-content:center; font-size:1.6rem; color:var(--dark-green); box-shadow:0 6px 0 var(--light-green);"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social-icon" style="background:white; width:52px; height:52px; border-radius:30px; display:flex; align-items:center; justify-content:center; font-size:1.6rem; color:var(--dark-green); box-shadow:0 6px 0 var(--light-green);"><i class="fab fa-tiktok"></i></a>
+            <a href="#" class="social-icon" style="background:white; width:52px; height:52px; border-radius:30px; display:flex; align-items:center; justify-content:center; font-size:1.6rem; color:var(--dark-green); box-shadow:0 6px 0 var(--light-green);"><i class="fab fa-youtube"></i></a>
+            <a href="#" class="social-icon" style="background:white; width:52px; height:52px; border-radius:30px; display:flex; align-items:center; justify-content:center; font-size:1.6rem; color:var(--dark-green); box-shadow:0 6px 0 var(--light-green);"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-icon" style="background:white; width:52px; height:52px; border-radius:30px; display:flex; align-items:center; justify-content:center; font-size:1.6rem; color:var(--dark-green); box-shadow:0 6px 0 var(--light-green);"><i class="fab fa-x-twitter"></i></a>
+            <a href="#" class="social-icon" style="background:white; width:52px; height:52px; border-radius:30px; display:flex; align-items:center; justify-content:center; font-size:1.6rem; color:var(--dark-green); box-shadow:0 6px 0 var(--light-green);"><i class="fab fa-telegram-plane"></i></a>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container" style="display: flex; flex-wrap: wrap; justify-content: space-between;">
+            <div style="display: flex; gap: 16px; align-items: center;">
+                <div class="logo-img" style="background: white; color: var(--dark-green); border: 3px solid var(--dark-green);">+256<br>782<br>575<br>225</div>
+                <span>© 2025 HILFS CHARITY — blog & gallery in sync</span>
+            </div>
+            <div style="display: flex; gap: 24px; color: var(--light-green);">
+                <i class="fas fa-envelope"></i>
+                <i class="fas fa-phone-alt"></i>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        (function() {
+            // Mobile toggle
+            document.getElementById('menuToggle')?.addEventListener('click', function() {
+                document.getElementById('navLinks').classList.toggle('show');
+            });
+
+            // ----- DATA STORAGE (simulated sync with gallery & homepage) -----
+            let blogPosts = [
+                {
+                    id: 1,
+                    img: 'https://picsum.photos/400/300?random=101',
+                    category: 'Orphan feeding',
+                    title: 'Monthly feeding in Kampala',
+                    meta: 'Feb 2025, Uganda',
+                    excerpt: '400 orphans received warm meals and education supplies.'
+                },
+                {
+                    id: 2,
+                    img: 'https://picsum.photos/400/300?random=102',
+                    category: 'Water wells',
+                    title: 'Well #17 complete',
+                    meta: 'Jan 2025, Karamoja',
+                    excerpt: 'Clean water for 800 people. Another community lifted.'
+                },
+                {
+                    id: 3,
+                    img: 'https://picsum.photos/400/300?random=103',
+                    category: 'Kurban',
+                    title: 'Eid kurban distribution',
+                    meta: 'Dec 2024, 5 villages',
+                    excerpt: 'Meat packages shared with 300+ families.'
+                }
+            ];
+
+            // references
+            const container = document.getElementById('blogPostsContainer');
+            const galleryPreview = document.getElementById('galleryPreviewGrid');
+            const publishBtn = document.getElementById('publishBtn');
+
+            // helper: render all blog posts
+            function renderBlogs() {
+                let html = '';
+                blogPosts.forEach(post => {
+                    html += `
+                        <div class="blog-card">
+                            <div class="blog-image" style="background-image: url('${post.img}');">
+                                <span class="blog-category">${post.category}</span>
+                            </div>
+                            <div class="blog-content">
+                                <div class="blog-meta"><span>${post.meta}</span> <span><i class="far fa-heart"></i> 42</span></div>
+                                <div class="blog-title">${post.title}</div>
+                                <div class="blog-excerpt">${post.excerpt}</div>
+                                <button class="read-more" onclick="alert('Reading full post: ${post.title}')">Read more</button>
+                            </div>
+                        </div>
+                    `;
+                });
+                container.innerHTML = html;
+            }
+
+            // render gallery preview (last 4 images from blog posts)
+            function renderGalleryPreview() {
+                // take most recent 4 (assuming last items are latest)
+                let recent = [...blogPosts].reverse().slice(0,4);
+                let previewHtml = '';
+                recent.forEach(post => {
+                    previewHtml += `<div class="preview-item" style="background-image: url('${post.img}');" title="${post.title}"></div>`;
+                });
+                // if less than 4, add placeholders
+                while (recent.length < 4) {
+                    previewHtml += `<div class="preview-item" style="background: #b7d9b1; display: flex; align-items: center; justify-content: center;"><i class="fas fa-image" style="color: var(--dark-green);"></i></div>`;
+                    recent.push(null);
+                }
+                galleryPreview.innerHTML = previewHtml;
+            }
+
+            // add new post from admin form
+            function addNewPost(event) {
+                const imgUrl = document.getElementById('imgUrl').value.trim();
+                const category = document.getElementById('categorySelect').value;
+                const title = document.getElementById('postTitle').value.trim();
+                const meta = document.getElementById('postMeta').value.trim();
+                const excerpt = document.getElementById('postExcerpt').value.trim();
+
+                if (!imgUrl || !title) {
+                    alert('Please fill at least image URL and title');
+                    return;
+                }
+
+                const newPost = {
+                    id: Date.now(),
+                    img: imgUrl,
+                    category: category,
+                    title: title,
+                    meta: meta || 'just now',
+                    excerpt: excerpt || 'New update from HILFS.'
+                };
+
+                blogPosts.push(newPost);
+                renderBlogs();
+                renderGalleryPreview();
+
+                // Simulate homepage gallery update (alert to demonstrate sync)
+                alert('✅ Post published! It now appears in the blog, gallery preview, and would also update the homepage gallery section (simulated full sync).');
+
+                // optionally clear some fields? not clearing to allow quick multiple posts
+            }
+
+            publishBtn.addEventListener('click', addNewPost);
+
+            // initial render
+            renderBlogs();
+            renderGalleryPreview();
+
+            // make delete/modify possible? but we focus on sync
+
+            // simulate that homepage gallery gets updated: we already update preview.
+            // For full effect, we could also update a dummy homepage section but this page is blog.
+
+            // Additional: readmore already handled with alert
+
+            // Also attach to window for readmore function
+            window.readMoreAlert = (title) => alert('Reading full post: ' + title);
+        })();
+    </script>
+
+    <!-- small style to make preview images consistent -->
+    <style>
+        .preview-item {
+            background-size: cover;
+            background-position: center;
+        }
+    </style>
+</body>
+</html>

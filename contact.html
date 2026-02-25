@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HILFS CHARITY · contact us | get in touch</title>
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Google Font: Inter (modern) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        :root {
+            --dark-green: #1e4a3b;
+            --medium-green: #2e6b4e;
+            --light-green: #b7d9b1;
+            --pure-white: #ffffff;
+            --off-white: #f5faf2;
+            --text-dark: #1d352a;
+            --shadow-sm: 0 12px 28px -8px rgba(30,74,59,0.1);
+            --card-hover: 0 25px 35px -12px #1e4a3b40;
+        }
+
+        body {
+            background-color: var(--off-white);
+            color: var(--text-dark);
+            line-height: 1.5;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* navigation (consistent with all pages) */
+        .navbar {
+            background-color: var(--pure-white);
+            box-shadow: var(--shadow-sm);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(4px);
+            background-color: rgba(255,255,255,0.95);
+        }
+        .nav-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            padding: 12px 0;
+        }
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+        .logo-img {
+            width: 58px;
+            height: 58px;
+            background: var(--dark-green);
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 16px;
+            color: var(--light-green);
+            border: 3px solid var(--light-green);
+            box-shadow: 0 6px 0 var(--medium-green);
+            text-align: center;
+            line-height: 1.2;
+        }
+        .logo-img span {
+            transform: scale(0.9);
+            letter-spacing: 0.5px;
+        }
+        .logo-text h2 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--dark-green);
+        }
+        .logo-text p {
+            font-size: 0.7rem;
+            letter-spacing: 2.5px;
+            color: var(--medium-green);
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        .nav-links a {
+            text-decoration: none;
+            font-weight: 600;
+            color: #2b4a3a;
+            transition: 0.2s;
+            font-size: 0.95rem;
+            border-bottom: 2px solid transparent;
+            padding: 4px 0;
+        }
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--dark-green);
+            border-bottom-color: var(--light-green);
+        }
+        .donate-nav-btn {
+            background-color: var(--dark-green);
+            color: white !important;
+            padding: 8px 24px !important;
+            border-radius: 40px;
+            font-weight: 700;
+            border-bottom: none !important;
+            box-shadow: 0 4px 0 #0e2b21;
+        }
+        .donate-nav-btn:hover {
+            background-color: var(--medium-green);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 0 #0e2b21;
+        }
+        .menu-toggle {
+            display: none;
+            font-size: 1.8rem;
+            color: var(--dark-green);
+            cursor: pointer;
+        }
+
+        /* page header */
+        .contact-header {
+            background: linear-gradient(145deg, var(--dark-green), #236b4a);
+            padding: 50px 0 40px;
+            color: white;
+            border-bottom: 8px solid var(--light-green);
+        }
+        .contact-header h1 {
+            font-size: 3.2rem;
+            font-weight: 700;
+            color: var(--light-green);
+        }
+        .contact-header .sub {
+            color: #ddf3d8;
+            font-size: 1.2rem;
+        }
+
+        /* contact grid */
+        .contact-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin: 60px 0;
+        }
+        .contact-form-card {
+            flex: 2 1 500px;
+            background: var(--pure-white);
+            border-radius: 50px 20px 50px 20px;
+            padding: 40px;
+            box-shadow: var(--shadow-sm);
+            border: 3px solid var(--light-green);
+        }
+        .contact-info-card {
+            flex: 1 1 280px;
+            background: var(--dark-green);
+            border-radius: 40px 16px 40px 16px;
+            padding: 40px 30px;
+            color: var(--light-green);
+            box-shadow: var(--shadow-sm);
+            border: 3px solid var(--light-green);
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--dark-green);
+            margin-bottom: 20px;
+        }
+        .contact-info-card .section-title {
+            color: var(--light-green);
+        }
+
+        /* form styles */
+        .form-group {
+            margin-bottom: 24px;
+        }
+        .form-group label {
+            font-weight: 600;
+            color: var(--dark-green);
+            display: block;
+            margin-bottom: 8px;
+        }
+        .form-group input, .form-group textarea, .form-group select {
+            width: 100%;
+            padding: 16px 22px;
+            border-radius: 60px;
+            border: 2px solid var(--light-green);
+            font-size: 1rem;
+            outline: none;
+            background: var(--off-white);
+            transition: 0.2s;
+        }
+        .form-group textarea {
+            border-radius: 30px;
+            resize: vertical;
+            min-height: 120px;
+        }
+        .form-group input:focus, .form-group textarea:focus {
+            border-color: var(--dark-green);
+        }
+
+        .submit-btn {
+            background: var(--dark-green);
+            color: white;
+            border: none;
+            padding: 18px 40px;
+            border-radius: 60px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            width: 100%;
+            cursor: pointer;
+            transition: 0.15s;
+            box-shadow: 0 8px 0 #0a2b1f;
+        }
+        .submit-btn:hover {
+            background: var(--medium-green);
+            transform: translateY(-3px);
+            box-shadow: 0 11px 0 #0a2b1f;
+        }
+
+        /* contact info items */
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin: 30px 0;
+            background: #ffffff15;
+            padding: 18px 20px;
+            border-radius: 60px;
+            border: 2px dashed var(--light-green);
+        }
+        .info-item i {
+            font-size: 1.8rem;
+            color: var(--light-green);
+            width: 40px;
+        }
+        .info-item div {
+            line-height: 1.4;
+        }
+        .info-item strong {
+            color: white;
+        }
+
+        .social-mini {
+            display: flex;
+            gap: 15px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+        .social-mini a {
+            background: var(--light-green);
+            color: var(--dark-green);
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            transition: 0.2s;
+            border: 2px solid white;
+        }
+        .social-mini a:hover {
+            transform: translateY(-5px);
+            background: white;
+            color: var(--dark-green);
+        }
+
+        /* live chat simulation */
+        .chat-bubble {
+            background: var(--light-green);
+            border-radius: 60px 60px 20px 60px;
+            padding: 20px;
+            margin: 30px 0;
+            color: var(--dark-green);
+            font-weight: 500;
+            border: 3px solid var(--dark-green);
+            position: relative;
+        }
+        .chat-bubble:after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            right: 20px;
+            border-width: 15px 15px 0;
+            border-style: solid;
+            border-color: var(--light-green) transparent;
+        }
+        .chat-btn {
+            background: white;
+            color: var(--dark-green);
+            border: 3px solid var(--dark-green);
+            padding: 12px 30px;
+            border-radius: 60px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .chat-btn:hover {
+            background: var(--dark-green);
+            color: white;
+        }
+
+        /* map placeholder */
+        .map-placeholder {
+            background: #cde2c4;
+            border-radius: 40px 16px 40px 16px;
+            padding: 40px;
+            text-align: center;
+            margin: 40px 0;
+            border: 3px solid var(--light-green);
+            background-image: radial-gradient(circle at 20px 20px, var(--light-green) 2px, transparent 2px), 
+                              radial-gradient(circle at 80px 150px, var(--light-green) 3px, transparent 3px);
+            background-size: 40px 40px, 100px 100px;
+        }
+
+        .footer {
+            background: var(--dark-green);
+            color: var(--light-green);
+            padding: 40px 0;
+            border-top: 8px solid var(--light-green);
+        }
+
+        @media (max-width: 900px) {
+            .nav-links { display: none; flex-direction: column; width: 100%; }
+            .nav-links.show { display: flex; }
+            .menu-toggle { display: block; }
+        }
+        .active-contact {
+            border-bottom-color: var(--light-green) !important;
+            color: var(--dark-green) !important;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container nav-container">
+            <div class="logo-area">
+                <div class="logo-img"><span>+256<br>782<br>575<br>225</span></div>
+                <div class="logo-text"><h2>HILFS</h2><p>charity organisation</p></div>
+            </div>
+            <div class="menu-toggle" id="menuToggle"><i class="fas fa-bars"></i></div>
+            <div class="nav-links" id="navLinks">
+                <a href="index.html">HOME</a>
+                <a href="about.html">ABOUT US</a>
+                <a href="activity.html">ACTIVITIES</a>
+                <a href="contact.html" class="active-contact">CONTACT </a>
+                <a href="gallery.html">GALLERY</a>
+                <a href="blog.html">BLOG</a>
+                <a href="donate.html" class="donate-nav-btn">DONATE</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="contact-header">
+        <div class="container">
+            <span class="sub">WE'D LOVE TO HEAR FROM YOU</span>
+            <h1>Contact <span style="background: var(--light-green); color: var(--dark-green); padding: 0 16px; border-radius: 80px;">HILFS</span></h1>
+            <p style="max-width: 600px; font-size: 1.2rem;">Reach out via form, phone, email, or live chat. We respond within 24 hours.</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="contact-grid">
+            <!-- left: contact form -->
+            <div class="contact-form-card">
+                <h2 class="section-title"><i class="fas fa-paper-plane" style="color: var(--light-green); margin-right: 10px;"></i> Send us a message</h2>
+                
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label>Full name *</label>
+                        <input type="text" placeholder="Your name" id="name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Email address *</label>
+                        <input type="email" placeholder="you@example.com" id="email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Subject</label>
+                        <select id="subject">
+                            <option>General inquiry</option>
+                            <option>Donation support</option>
+                            <option>Volunteer</option>
+                            <option>Partnership</option>
+                            <option>Report an issue</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Message *</label>
+                        <textarea placeholder="How can we help?" id="message" required></textarea>
+                    </div>
+                    
+                    <button type="button" class="submit-btn" id="submitContact"><i class="fas fa-heart"></i> Send message</button>
+                </form>
+                
+                <p style="margin-top: 20px; color: var(--medium-green);"><i class="fas fa-clock"></i> Typically replies within 1 business day</p>
+            </div>
+
+            <!-- right: contact info & live chat -->
+            <div class="contact-info-card">
+                <h2 class="section-title">Connect with us</h2>
+                
+                <div class="info-item">
+                    <i class="fas fa-map-pin"></i>
+                    <div><strong>Head office</strong><br>123 Charity Road, Kampala, Uganda</div>
+                </div>
+                
+                <div class="info-item">
+                    <i class="fas fa-phone-alt"></i>
+                    <div><strong>Phone</strong><br>+256 782 575 225 <br> <span style="opacity:0.9;">(Mon-Fri 9am-5pm)</span></div>
+                </div>
+                
+                <div class="info-item">
+                    <i class="fas fa-envelope"></i>
+                    <div><strong>Email</strong><br>info@hilfscharity.org<br>donations@hilfscharity.org</div>
+                </div>
+                
+                <div class="info-item">
+                    <i class="fas fa-clock"></i>
+                    <div><strong>Working hours</strong><br>8:00 AM – 6:00 PM (EAT)</div>
+                </div>
+
+                <!-- live chat simulation -->
+                <div class="chat-bubble">
+                    <i class="fas fa-comment-dots" style="font-size: 1.5rem; margin-right: 8px;"></i>
+                    Need instant help? Try our live chat!
+                </div>
+                <button class="chat-btn" id="chatSimulate"><i class="fas fa-comment"></i> Start live chat</button>
+
+                <!-- mini social (quick links) -->
+                <div class="social-mini">
+                    <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-telegram-plane"></i></a>
+                    <a href="#"><i class="fab fa-x-twitter"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <!-- map / location area (interactive) -->
+        <div class="map-placeholder" id="mapInteract">
+            <i class="fas fa-map-marked-alt" style="font-size: 4rem; color: var(--dark-green); margin-bottom: 20px;"></i>
+            <h3 style="color: var(--dark-green); font-size: 1.8rem;">Visit our headquarters</h3>
+            <p style="margin: 20px 0; max-width: 500px; margin-left: auto; margin-right: auto;">📍 123 Charity Road, Kampala, Uganda — open for visitors during working hours.</p>
+            <button class="chat-btn" style="background: var(--dark-green); color: white;" onclick="alert('📍 Directions: 5 min from city center. We are near the green mosque. (simulated)')"><i class="fas fa-directions"></i> Get directions</button>
+        </div>
+
+        <!-- FAQ teaser (optional) -->
+        <div style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; margin: 40px 0 60px;">
+            <div style="background: white; border-radius: 80px; padding: 16px 32px; border: 2px solid var(--light-green);"><i class="fas fa-question-circle"></i> Frequently asked questions →</div>
+            <div style="background: white; border-radius: 80px; padding: 16px 32px; border: 2px solid var(--light-green);"><i class="fas fa-headset"></i> 24/7 support: +256 782 575 225</div>
+        </div>
+    </div>
+
+    <!-- social links full set (as always) -->
+    <div style="display: flex; gap: 20px; justify-content: center; margin: 20px 0 40px;">
+        <a href="#" class="social-icon" style="background:white; width:52px; height:52px; border-radius:30px; display:inline-flex; align-items:center; justify-content:center; font-size:1.6rem; color:var(--dark-green); box-shadow:0 6px 0 var(--light-green);"><i class="fab fa-whatsapp"></i></a>
+        <a href="#" class="social-icon" style="background:white; width:52px; height:52px; border-radius:30px; display:inline-flex; align-items:center; justify-content:center; font-size:1.6rem; color:var(--dark-green); box-shadow:0 6px 0 var(--light-green);"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" class="social-icon" style="background:white; width:52px; height:52px; border-radius:30px; display:inline-flex; align-items:center; justify-content:center; font-size:1.6rem; color:var(--dark-green); box-shadow:0 6px 0 var(--light-green);"><i class="fab fa-tiktok"></i></a>
+        <a href="#" class="social-icon" style="background:white; width:52px; height:52px; border-radius:30px; display:inline-flex; align-items:center; justify-content:center; font-size:1.6rem; color:var(--dark-green); box-shadow:0 6px 0 var(--light-green);"><i class="fab fa-youtube"></i></a>
+        <a href="#" class="social-icon" style="background:white; width:52px; height:52px; border-radius:30px; display:inline-flex; align-items:center; justify-content:center; font-size:1.6rem; color:var(--dark-green); box-shadow:0 6px 0 var(--light-green);"><i class="fab fa-instagram"></i></a>
+        <a href="#" class="social-icon" style="background:white; width:52px; height:52px; border-radius:30px; display:inline-flex; align-items:center; justify-content:center; font-size:1.6rem; color:var(--dark-green); box-shadow:0 6px 0 var(--light-green);"><i class="fab fa-x-twitter"></i></a>
+        <a href="#" class="social-icon" style="background:white; width:52px; height:52px; border-radius:30px; display:inline-flex; align-items:center; justify-content:center; font-size:1.6rem; color:var(--dark-green); box-shadow:0 6px 0 var(--light-green);"><i class="fab fa-telegram-plane"></i></a>
+    </div>
+
+    <footer class="footer">
+        <div class="container" style="display: flex; flex-wrap: wrap; justify-content: space-between;">
+            <div style="display: flex; gap: 16px; align-items: center;">
+                <div class="logo-img" style="background: white; color: var(--dark-green); border: 3px solid var(--dark-green);">+256<br>782<br>575<br>225</div>
+                <span>© 2025 HILFS CHARITY — we're here to help</span>
+            </div>
+            <div style="display: flex; gap: 24px; color: var(--light-green);">
+                <i class="fas fa-envelope"></i>
+                <i class="fas fa-phone-alt"></i>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        (function() {
+            // mobile toggle
+            document.getElementById('menuToggle')?.addEventListener('click', function() {
+                document.getElementById('navLinks').classList.toggle('show');
+            });
+
+            // contact form submission simulation
+            document.getElementById('submitContact').addEventListener('click', function() {
+                const name = document.getElementById('name').value.trim();
+                const email = document.getElementById('email').value.trim();
+                const message = document.getElementById('message').value.trim();
+                
+                if (!name || !email || !message) {
+                    alert('Please fill in all required fields (name, email, message).');
+                    return;
+                }
+                
+                alert(`✨ Thank you ${name}! Your message has been sent. We'll reply within 24 hours. (simulated)`);
+                // optionally reset
+                document.getElementById('contactForm').reset();
+            });
+
+            // live chat simulation
+            document.getElementById('chatSimulate').addEventListener('click', function() {
+                alert('💬 Live chat: A volunteer will connect with you shortly. (simulated demo)');
+            });
+
+            // map interact
+            window.directions = function() {
+                alert('📍 Directions: 5 min from city center. We are near the green mosque.');
+            };
+        })();
+    </script>
+</body>
+</html>

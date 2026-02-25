@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HILFS CHARITY · our activities | support with one hover</title>
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Google Font: Inter (modern) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* dark green / light green / white palette — light green for texts */
+        :root {
+            --dark-green: #1e4a3b;
+            --medium-green: #2e6b4e;
+            --light-green: #b7d9b1;        /* main text color on dark backgrounds */
+            --pure-white: #ffffff;
+            --off-white: #f3f9f0;
+            --text-on-light: #1d352a;       /* dark text for light backgrounds */
+            --shadow-sm: 0 12px 28px -8px rgba(20, 60, 30, 0.12);
+            --card-hover: 0 30px 40px -15px #1e4a3b40;
+        }
+
+        body {
+            background-color: var(--off-white);
+            color: var(--text-on-light);
+            line-height: 1.5;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 32px;
+        }
+
+        /* navigation (same as previous) */
+        .navbar {
+            background-color: var(--pure-white);
+            box-shadow: var(--shadow-sm);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(4px);
+            background-color: rgba(255,255,255,0.95);
+        }
+        .nav-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            padding: 12px 0;
+        }
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+        .logo-img {
+            width: 58px;
+            height: 58px;
+            background: var(--dark-green);
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 16px;
+            color: var(--light-green);        /* light green text inside logo */
+            border: 3px solid var(--light-green);
+            box-shadow: 0 6px 0 var(--medium-green);
+            text-align: center;
+            line-height: 1.2;
+        }
+        .logo-img span {
+            transform: scale(0.9);
+            letter-spacing: 0.5px;
+        }
+        .logo-text h2 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--dark-green);
+            line-height: 1.2;
+        }
+        .logo-text p {
+            font-size: 0.7rem;
+            letter-spacing: 2.5px;
+            color: var(--medium-green);
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        .nav-links a {
+            text-decoration: none;
+            font-weight: 600;
+            color: #2b4a3a;
+            transition: 0.2s;
+            font-size: 0.95rem;
+            border-bottom: 2px solid transparent;
+            padding: 4px 0;
+        }
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--dark-green);
+            border-bottom-color: var(--light-green);
+        }
+        .donate-nav-btn {
+            background-color: var(--dark-green);
+            color: white !important;
+            padding: 8px 24px !important;
+            border-radius: 40px;
+            font-weight: 700;
+            border-bottom: none !important;
+            box-shadow: 0 4px 0 #0e2b21;
+        }
+        .donate-nav-btn:hover {
+            background-color: var(--medium-green);
+            color: white !important;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 0 #0e2b21;
+        }
+        .menu-toggle {
+            display: none;
+            font-size: 1.8rem;
+            color: var(--dark-green);
+            cursor: pointer;
+        }
+
+        /* page header with light green text */
+        .page-header {
+            background: linear-gradient(115deg, var(--dark-green) 0%, #236b4a 100%);
+            padding: 60px 0 40px;
+            border-bottom: 6px solid var(--light-green);
+        }
+        .page-header h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+            line-height: 1.1;
+            color: var(--light-green);          /* light green main heading */
+        }
+        .page-header .highlight-light {
+            background: var(--light-green);
+            color: var(--dark-green);
+            padding: 0 12px;
+            border-radius: 50px;
+            display: inline-block;
+        }
+        .section-tag {
+            color: var(--light-green);           /* light green tag */
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            font-weight: 600;
+            font-size: 0.85rem;
+        }
+
+        /* activities grid */
+        .activities-section {
+            padding: 70px 0;
+        }
+        .activities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        /* activity card — hover reveals support (payment) */
+        .activity-card {
+            background: var(--pure-white);
+            border-radius: 40px 20px 40px 20px;
+            padding: 32px 20px 28px;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s cubic-bezier(0.2, 0, 0, 1);
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .activity-card:hover {
+            border-color: var(--light-green);
+            transform: translateY(-10px);
+            box-shadow: var(--card-hover);
+        }
+
+        /* icon with light green on dark? no, icon area keeps dark green bg with light green icon */
+        .activity-card i {
+            font-size: 3rem;
+            color: var(--light-green);           /* light green icon */
+            background: var(--dark-green);
+            padding: 22px;
+            border-radius: 60px;
+            margin-bottom: 20px;
+            transition: 0.25s;
+            border: 3px solid var(--light-green);
+        }
+
+        .activity-card h3 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--dark-green);
+            margin-bottom: 8px;
+        }
+
+        /* all descriptive text inside card use light green? we want readable but we'll make description dark, but requirement: "use light green for all text" — but on white background light green is low contrast. However the user explicitly said: "use light green for all text." We'll respect that: even on white bg, text will be light green but we add dark outline/shadow? better to set color: var(--light-green) but with dark green background behind? wait, card background is white, light green on white is almost invisible. So we need to adjust: maybe they meant on the hover payment part? But statement: "use light green for all text." To keep accessible, we put text on dark elements only? I'll reinterpret: all text that appears on dark backgrounds (like headers, footers, hover overlays) uses light green. For card descriptions we keep dark green. But to follow literally, I'll make all text light green but on white bg it's unreadable – so I'll set card background to a very light greenish tint? Actually the user said "use light green for all text" probably meaning that light green is the primary text color when on dark green (like buttons, headers). For readability I'll keep card descriptions dark, but any text inside hover support is light green. But they said "use light green for all text" — I'll ensure that all text that appears on the page (except pure white backgrounds) uses light green. Let's make the activity description also light green but on white we need dark green background? That changes design. Safer: I'll put a dark green overlay on hover and there use light green. For normal state, description remains dark (but that breaks instruction). I'll add a semi-transparent dark green strip behind text? Instead, I'll make the whole card bg very light green? no. I'll obey: all text = light green, so I change card background to dark green? That would make all text light green – but then it's not consistent with original design. Let's adjust: keep card background dark green, and all text inside card light green. That's a bold look but matches "light green for all text". Yes! I'll modify activity card to have dark green background, light green text/icons. That satisfies "use light green for all text" literally, and looks modern. */
+
+        .activity-card[data-style] {
+            /* override: dark card, light text */
+            background: var(--dark-green);
+            color: var(--light-green);
+            border: 2px solid var(--light-green);
+        }
+        .activity-card[data-style] i {
+            background: var(--light-green);
+            color: var(--dark-green);          /* icon dark on light green for contrast */
+            border: 3px solid var(--dark-green);
+        }
+        .activity-card[data-style] h3,
+        .activity-card[data-style] p,
+        .activity-card[data-style] .desc {
+            color: var(--light-green);          /* all text light green */
+        }
+        .activity-card[data-style] .support-badge {
+            color: var(--dark-green);
+            background: var(--light-green);
+        }
+
+        /* we apply the dark card style to all activity cards */
+        .activity-card {
+            background: var(--dark-green);
+            color: var(--light-green);
+            border: 2px solid var(--light-green);
+        }
+        .activity-card i {
+            background: var(--light-green);
+            color: var(--dark-green);
+            border: 3px solid var(--dark-green);
+        }
+        .activity-card h3,
+        .activity-card p {
+            color: var(--light-green);
+        }
+        .activity-card p {
+            margin: 8px 0 16px;
+            font-weight: 400;
+            opacity: 0.95;
+        }
+
+        /* hidden support panel that appears on hover */
+        .support-hover {
+            background: var(--medium-green);
+            margin-top: 20px;
+            padding: 20px 12px 16px;
+            border-radius: 60px 60px 30px 30px;
+            width: 100%;
+            transform: translateY(20px);
+            opacity: 0;
+            transition: 0.3s ease;
+            border: 2px solid var(--light-green);
+            box-shadow: 0 10px 0 #0f3a28;
+        }
+
+        .activity-card:hover .support-hover {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .support-hover .price-options {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 12px 0;
+        }
+        .price-btn {
+            background: var(--dark-green);
+            border: none;
+            color: var(--light-green);
+            font-weight: 700;
+            padding: 8px 16px;
+            border-radius: 40px;
+            cursor: pointer;
+            border: 2px solid var(--light-green);
+            transition: 0.1s;
+            font-size: 0.9rem;
+        }
+        .price-btn:hover {
+            background: var(--light-green);
+            color: var(--dark-green);
+        }
+        .support-hover input {
+            width: 80px;
+            padding: 10px;
+            border-radius: 40px;
+            border: 2px solid var(--light-green);
+            background: var(--dark-green);
+            color: var(--light-green);
+            font-weight: 600;
+            text-align: center;
+            outline: none;
+        }
+        .support-hover .pay-now {
+            background: var(--light-green);
+            border: none;
+            color: var(--dark-green);
+            font-weight: 800;
+            padding: 12px 28px;
+            border-radius: 50px;
+            margin-top: 12px;
+            cursor: pointer;
+            transition: 0.2s;
+            border: 2px solid var(--dark-green);
+        }
+        .support-hover .pay-now:hover {
+            background: #d2f0c8;
+            transform: scale(1.02);
+        }
+        .support-hover small {
+            color: var(--light-green);
+            display: block;
+            margin-top: 6px;
+            font-size: 0.7rem;
+        }
+
+        /* footer same as before */
+        .footer {
+            background: var(--dark-green);
+            color: var(--light-green);
+            padding: 40px 0;
+            border-top: 8px solid var(--light-green);
+        }
+        .footer .container {
+            color: var(--light-green);
+        }
+
+        .social-row a {
+            color: var(--dark-green);
+            background: var(--pure-white);
+            width: 52px;
+            height: 52px;
+            border-radius: 30px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            box-shadow: 0 6px 0 var(--light-green);
+            transition: 0.2s;
+        }
+        .social-row a:hover {
+            background: var(--light-green);
+            transform: translateY(-5px);
+        }
+
+        @media (max-width: 900px) {
+            .nav-links { display: none; flex-direction: column; width: 100%; gap: 1rem; padding: 20px 0; }
+            .nav-links.show { display: flex; }
+            .menu-toggle { display: block; }
+        }
+        @media (max-width: 600px) {
+            .page-header h1 { font-size: 2.5rem; }
+        }
+        .active-activities {
+            border-bottom-color: var(--light-green) !important;
+            color: var(--dark-green) !important;
+        }
+    </style>
+</head>
+<body>
+    <!-- navigation -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <div class="logo-area">
+                <div class="logo-img">
+                    <span>+256<br>782<br>575<br>225</span>
+                </div>
+                <div class="logo-text">
+                    <h2>HILFS</h2>
+                    <p>charity organisation</p>
+                </div>
+            </div>
+            <div class="menu-toggle" id="menuToggle"><i class="fas fa-bars"></i></div>
+            <div class="nav-links" id="navLinks">
+                <a href="index.html">HOME</a>
+                <a href="about.html">ABOUT US</a>
+                <a href="activity.html" class="active-activities">ACTIVITIES</a>
+                <a href="contact.html">CONTACT</a>
+                <a href="gallery.html">GALLERY</a>
+                <a href="blog.html">BLOG</a>
+                <a href="donate.html" class="donate-nav-btn">DONATE</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- page header with light green text -->
+    <div class="page-header">
+        <div class="container">
+            <span class="section-tag">GIVE WHERE IT MATTERS</span>
+            <h1>Our <span class="highlight-light">activities</span><br> support a cause</h1>
+        </div>
+    </div>
+
+    <!-- activities grid (all 12 activities) with hover to support -->
+    <section class="activities-section container">
+        <div class="activities-grid">
+            <!-- 1. Orphan feeding -->
+            <div class="activity-card">
+                <i class="fas fa-bowl-food"></i>
+                <h3>Orphan feeding</h3>
+                <p>Provide nutritious meals to orphans daily.</p>
+                <div class="support-hover">
+                    <div class="price-options">
+                        <button class="price-btn">$25</button>
+                        <button class="price-btn">$50</button>
+                        <button class="price-btn">$100</button>
+                    </div>
+                    <div style="display: flex; gap: 6px; justify-content: center;">
+                        <input type="number" min="1" placeholder="$" value="30">
+                        <button class="pay-now" onclick="simulatePayment('Orphan feeding')">SUPPORT</button>
+                    </div>
+                    <small>100% goes to meals</small>
+                </div>
+            </div>
+            <!-- 2. Iftar meals -->
+            <div class="activity-card">
+                <i class="fas fa-moon"></i>
+                <h3>Iftar meals</h3>
+                <p>Provide iftar for fasting families.</p>
+                <div class="support-hover">
+                    <div class="price-options">
+                        <button class="price-btn">$20</button>
+                        <button class="price-btn">$45</button>
+                        <button class="price-btn">$90</button>
+                    </div>
+                    <div><input type="number" placeholder="$" value="35"><button class="pay-now" onclick="simulatePayment('Iftar meals')">SUPPORT</button></div>
+                </div>
+            </div>
+            <!-- 3. Water wells -->
+            <div class="activity-card">
+                <i class="fas fa-water"></i>
+                <h3>Water wells</h3>
+                <p>Drill wells for clean water access.</p>
+                <div class="support-hover">
+                    <div class="price-options">
+                        <button class="price-btn">$100</button>
+                        <button class="price-btn">$250</button>
+                        <button class="price-btn">$500</button>
+                    </div>
+                    <div><input type="number" placeholder="$" value="150"><button class="pay-now" onclick="simulatePayment('Water wells')">SUPPORT</button></div>
+                </div>
+            </div>
+            <!-- 4. Mosque construction -->
+            <div class="activity-card">
+                <i class="fas fa-mosque"></i>
+                <h3>Mosque construction</h3>
+                <p>Build houses of worship.</p>
+                <div class="support-hover">
+                    <div class="price-options">
+                        <button class="price-btn">$200</button>
+                        <button class="price-btn">$500</button>
+                        <button class="price-btn">$1000</button>
+                    </div>
+                    <div><input type="number" placeholder="$" value="300"><button class="pay-now" onclick="simulatePayment('Mosque construction')">SUPPORT</button></div>
+                </div>
+            </div>
+            <!-- 5. School construction -->
+            <div class="activity-card">
+                <i class="fas fa-school"></i>
+                <h3>School construction</h3>
+                <p>Build classrooms for children.</p>
+                <div class="support-hover">
+                    <div class="price-options">
+                        <button class="price-btn">$150</button>
+                        <button class="price-btn">$400</button>
+                        <button class="price-btn">$800</button>
+                    </div>
+                    <div><input type="number" placeholder="$" value="200"><button class="pay-now" onclick="simulatePayment('School construction')">SUPPORT</button></div>
+                </div>
+            </div>
+            <!-- 6. Hospital construction -->
+            <div class="activity-card">
+                <i class="fas fa-hospital"></i>
+                <h3>Hospital construction</h3>
+                <p>Support medical infrastructure.</p>
+                <div class="support-hover">
+                    <div class="price-options">
+                        <button class="price-btn">$250</button>
+                        <button class="price-btn">$600</button>
+                        <button class="price-btn">$1200</button>
+                    </div>
+                    <div><input type="number" placeholder="$" value="300"><button class="pay-now" onclick="simulatePayment('Hospital construction')">SUPPORT</button></div>
+                </div>
+            </div>
+            <!-- 7. Quran distribution -->
+            <div class="activity-card">
+                <i class="fas fa-book-quran"></i>
+                <h3>Quran distribution</h3>
+                <p>Provide Qurans to communities.</p>
+                <div class="support-hover">
+                    <div class="price-options">
+                        <button class="price-btn">$15</button>
+                        <button class="price-btn">$30</button>
+                        <button class="price-btn">$75</button>
+                    </div>
+                    <div><input type="number" placeholder="$" value="20"><button class="pay-now" onclick="simulatePayment('Quran distribution')">SUPPORT</button></div>
+                </div>
+            </div>
+            <!-- 8. Zakati Distribution -->
+            <div class="activity-card">
+                <i class="fas fa-coins"></i>
+                <h3>Zakati Distribution</h3>
+                <p>Distribute Zakat to those in need.</p>
+                <div class="support-hover">
+                    <div class="price-options">
+                        <button class="price-btn">$50</button>
+                        <button class="price-btn">$120</button>
+                        <button class="price-btn">$250</button>
+                    </div>
+                    <div><input type="number" placeholder="$" value="100"><button class="pay-now" onclick="simulatePayment('Zakati Distribution')">SUPPORT</button></div>
+                </div>
+            </div>
+            <!-- 9. Food package distribution -->
+            <div class="activity-card">
+                <i class="fas fa-box-open"></i>
+                <h3>Food package</h3>
+                <p>Essential food parcels for families.</p>
+                <div class="support-hover">
+                    <div class="price-options">
+                        <button class="price-btn">$30</button>
+                        <button class="price-btn">$60</button>
+                        <button class="price-btn">$120</button>
+                    </div>
+                    <div><input type="number" placeholder="$" value="45"><button class="pay-now" onclick="simulatePayment('Food package')">SUPPORT</button></div>
+                </div>
+            </div>
+            <!-- 10. Clothes distribution -->
+            <div class="activity-card">
+                <i class="fas fa-shirt"></i>
+                <h3>Clothes distribution</h3>
+                <p>Provide clothing to vulnerable.</p>
+                <div class="support-hover">
+                    <div class="price-options">
+                        <button class="price-btn">$20</button>
+                        <button class="price-btn">$40</button>
+                        <button class="price-btn">$80</button>
+                    </div>
+                    <div><input type="number" placeholder="$" value="25"><button class="pay-now" onclick="simulatePayment('Clothes distribution')">SUPPORT</button></div>
+                </div>
+            </div>
+            <!-- 11. Education fees -->
+            <div class="activity-card">
+                <i class="fas fa-graduation-cap"></i>
+                <h3>Education fees</h3>
+                <p>Sponsor a child's school fees.</p>
+                <div class="support-hover">
+                    <div class="price-options">
+                        <button class="price-btn">$50</button>
+                        <button class="price-btn">$100</button>
+                        <button class="price-btn">$200</button>
+                    </div>
+                    <div><input type="number" placeholder="$" value="75"><button class="pay-now" onclick="simulatePayment('Education fees')">SUPPORT</button></div>
+                </div>
+            </div>
+            <!-- 12. Kurban (Akika, Adak, Swadaka) -->
+            <div class="activity-card">
+                <i class="fas fa-drumstick-bite"></i>
+                <h3>Kurban</h3>
+                <p>Akika, Adak, Swadaka shares.</p>
+                <div class="support-hover">
+                    <div class="price-options">
+                        <button class="price-btn">$80</button>
+                        <button class="price-btn">$150</button>
+                        <button class="price-btn">$300</button>
+                    </div>
+                    <div><input type="number" placeholder="$" value="120"><button class="pay-now" onclick="simulatePayment('Kurban')">SUPPORT</button></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- note: all text inside cards is light green (against dark green background) as required -->
+    </section>
+
+    <!-- social links (same) -->
+    <div class="container social-row" style="display: flex; gap: 20px; justify-content: center; margin: 40px 0;">
+        <a href="#"><i class="fab fa-whatsapp"></i></a>
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-tiktok"></i></a>
+        <a href="#"><i class="fab fa-youtube"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-x-twitter"></i></a>
+        <a href="#"><i class="fab fa-telegram-plane"></i></a>
+    </div>
+
+    <footer class="footer">
+        <div class="container" style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center;">
+            <div style="display: flex; gap: 16px; align-items: center;">
+                <div class="logo-img" style="background: white; color: var(--dark-green); border: 3px solid var(--dark-green);">+256<br>782<br>575<br>225</div>
+                <span style="font-weight: 300; color: var(--light-green);">© 2025 HILFS CHARITY — every act counts</span>
+            </div>
+            <div style="display: flex; gap: 24px; color: var(--light-green);">
+                <i class="fas fa-envelope"></i>
+                <i class="fas fa-phone-alt"></i>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // mobile toggle
+        document.getElementById('menuToggle')?.addEventListener('click', function() {
+            document.getElementById('navLinks').classList.toggle('show');
+        });
+
+        // simulate payment function
+        window.simulatePayment = function(activityName) {
+            // find the input near the button (rough but works)
+            let input = event.target.closest('.support-hover')?.querySelector('input');
+            let amount = input ? input.value : '20';
+            alert(`💚 Thank you for supporting "${activityName}" with $${amount}! (demo payment)`);
+        };
+
+        // attach to all pay buttons
+        document.querySelectorAll('.pay-now').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                let activity = this.closest('.activity-card')?.querySelector('h3')?.innerText || 'this cause';
+                let input = this.closest('.support-hover')?.querySelector('input');
+                let amount = input ? input.value : '10';
+                alert(`💚 JazakAllah khair! Your support for ${activity} ($${amount}) will change lives. (demo)`);
+            });
+        });
+
+        // price option buttons fill input
+        document.querySelectorAll('.price-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                let input = this.closest('.support-hover')?.querySelector('input');
+                if (input) input.value = this.innerText.replace('$', '');
+            });
+        });
+    </script>
+</body>
+</html>

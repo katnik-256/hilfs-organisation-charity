@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HILFS CHARITY · About Us | Green modern</title>
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Google Font: Inter (modern) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* dark green / light green / white palette */
+        :root {
+            --dark-green: #1e4a3b;
+            --medium-green: #2e6b4e;
+            --light-green: #b7d9b1;
+            --pure-white: #ffffff;
+            --off-white: #f3f9f0;
+            --text-dark: #1d352a;
+            --shadow-sm: 0 12px 28px -8px rgba(20, 60, 30, 0.12);
+            --card-hover: 0 30px 40px -15px #1e4a3b40;
+        }
+
+        body {
+            background-color: var(--off-white);
+            color: var(--text-dark);
+            line-height: 1.5;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 32px;
+        }
+
+        /* navigation same as home (consistent) */
+        .navbar {
+            background-color: var(--pure-white);
+            box-shadow: var(--shadow-sm);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(4px);
+            background-color: rgba(255,255,255,0.95);
+        }
+        .nav-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            padding: 12px 0;
+        }
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+        .logo-img {
+            width: 58px;
+            height: 58px;
+            background: var(--dark-green);
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 16px;
+            color: var(--light-green);
+            border: 3px solid var(--light-green);
+            box-shadow: 0 6px 0 var(--medium-green);
+            text-align: center;
+            line-height: 1.2;
+        }
+        .logo-img span {
+            transform: scale(0.9);
+            letter-spacing: 0.5px;
+        }
+        .logo-text h2 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--dark-green);
+            line-height: 1.2;
+        }
+        .logo-text p {
+            font-size: 0.7rem;
+            letter-spacing: 2.5px;
+            color: var(--medium-green);
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        .nav-links a {
+            text-decoration: none;
+            font-weight: 600;
+            color: #2b4a3a;
+            transition: 0.2s;
+            font-size: 0.95rem;
+            border-bottom: 2px solid transparent;
+            padding: 4px 0;
+        }
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--dark-green);
+            border-bottom-color: var(--light-green);
+        }
+        .donate-nav-btn {
+            background-color: var(--dark-green);
+            color: white !important;
+            padding: 8px 24px !important;
+            border-radius: 40px;
+            font-weight: 700;
+            border-bottom: none !important;
+            box-shadow: 0 4px 0 #0e2b21;
+        }
+        .donate-nav-btn:hover {
+            background-color: var(--medium-green);
+            color: white !important;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 0 #0e2b21;
+        }
+        .menu-toggle {
+            display: none;
+            font-size: 1.8rem;
+            color: var(--dark-green);
+            cursor: pointer;
+        }
+
+        /* ---------- about us specific styles ---------- */
+        .page-header {
+            background: linear-gradient(115deg, var(--dark-green) 0%, #276b4c 100%);
+            padding: 60px 0 40px;
+            color: white;
+            border-bottom: 6px solid var(--light-green);
+        }
+        .page-header h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+            line-height: 1.1;
+        }
+        .page-header .green-highlight {
+            background: var(--light-green);
+            color: var(--dark-green);
+            padding: 0 12px;
+            border-radius: 50px;
+            display: inline-block;
+        }
+
+        /* mission/vision cards */
+        .mission-vision {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin: 60px 0;
+        }
+        .mv-card {
+            flex: 1 1 280px;
+            background: var(--pure-white);
+            border-radius: 48px 20px 48px 20px;
+            padding: 40px 30px;
+            box-shadow: var(--shadow-sm);
+            transition: 0.3s;
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+        .mv-card:hover {
+            border-color: var(--light-green);
+            transform: translateY(-10px);
+            box-shadow: var(--card-hover);
+        }
+        .mv-card i {
+            font-size: 3rem;
+            color: var(--dark-green);
+            background: var(--light-green);
+            padding: 18px;
+            border-radius: 30px;
+            margin-bottom: 24px;
+        }
+        .mv-card h3 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--dark-green);
+            margin-bottom: 20px;
+        }
+        .mv-card p {
+            color: #2b463a;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+        .mv-card ul {
+            list-style: none;
+            margin-top: 20px;
+        }
+        .mv-card li {
+            margin: 12px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 500;
+        }
+        .mv-card li i {
+            font-size: 1.2rem;
+            padding: 0;
+            background: none;
+            color: var(--dark-green);
+            margin: 0;
+        }
+
+        /* values (interactive chips) */
+        .values-section {
+            margin: 70px 0 40px;
+        }
+        .section-tag {
+            color: var(--medium-green);
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            font-weight: 600;
+            font-size: 0.85rem;
+        }
+        .values-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin: 30px 0 20px;
+        }
+        .value-chip {
+            background: var(--pure-white);
+            padding: 16px 28px;
+            border-radius: 60px;
+            font-weight: 600;
+            font-size: 1.2rem;
+            color: var(--dark-green);
+            box-shadow: 0 4px 0 var(--light-green);
+            transition: 0.2s;
+            border: 2px solid var(--light-green);
+            cursor: default;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .value-chip i {
+            color: var(--medium-green);
+            font-size: 1.4rem;
+        }
+        .value-chip:hover {
+            background: var(--light-green);
+            transform: scale(1.02) translateY(-3px);
+            box-shadow: 0 8px 0 var(--medium-green);
+        }
+
+        /* founders */
+        .founders-title {
+            font-size: 2.2rem;
+            color: var(--dark-green);
+            margin: 50px 0 30px;
+        }
+        .founders-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            justify-content: center;
+            margin-bottom: 60px;
+        }
+        .founder-card {
+            background: var(--pure-white);
+            border-radius: 100px 100px 40px 40px;
+            padding: 30px 30px 40px;
+            flex: 1 1 260px;
+            max-width: 300px;
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+            transition: 0.25s;
+            border: 3px solid transparent;
+        }
+        .founder-card:hover {
+            border-color: var(--light-green);
+            transform: scale(1.02);
+            box-shadow: 0 30px 30px -16px #1e4a3b;
+        }
+        .founder-img {
+            width: 140px;
+            height: 140px;
+            background: var(--light-green);
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 5px solid var(--dark-green);
+            font-size: 4rem;
+            color: var(--dark-green);
+        }
+        .founder-card h4 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--dark-green);
+        }
+        .founder-card p {
+            color: var(--medium-green);
+            font-weight: 600;
+            margin: 8px 0;
+        }
+        .founder-social {
+            margin-top: 20px;
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+        }
+        .founder-social a {
+            color: var(--dark-green);
+            background: #e1f0dc;
+            width: 38px;
+            height: 38px;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.2s;
+        }
+        .founder-social a:hover {
+            background: var(--light-green);
+            transform: translateY(-3px);
+        }
+
+        /* team grid */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin: 40px 0 70px;
+        }
+        .team-member {
+            background: var(--pure-white);
+            border-radius: 40px 16px 40px 16px;
+            padding: 30px 16px 24px;
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+            transition: 0.25s;
+            border: 2px solid transparent;
+        }
+        .team-member:hover {
+            border-color: var(--light-green);
+            transform: translateY(-8px);
+        }
+        .member-img {
+            width: 110px;
+            height: 110px;
+            background: var(--light-green);
+            border-radius: 50%;
+            margin: 0 auto 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: var(--dark-green);
+            border: 4px solid var(--dark-green);
+        }
+        .team-member h4 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--dark-green);
+        }
+        .team-member .role {
+            color: var(--medium-green);
+            font-weight: 600;
+            margin: 6px 0;
+        }
+        .member-social {
+            margin-top: 12px;
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            opacity: 0.7;
+            transition: 0.2s;
+        }
+        .team-member:hover .member-social {
+            opacity: 1;
+        }
+        .member-social a {
+            color: var(--dark-green);
+            background: #edf7ea;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* callout / join banner */
+        .join-banner {
+            background: var(--dark-green);
+            border-radius: 80px 20px 80px 20px;
+            padding: 50px 40px;
+            color: white;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            margin: 60px 0;
+            border: 4px solid var(--light-green);
+        }
+        .join-banner h2 {
+            font-size: 2.2rem;
+            font-weight: 700;
+        }
+        .join-banner .btn-light {
+            background: var(--light-green);
+            color: var(--dark-green);
+            padding: 16px 42px;
+            border-radius: 60px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            border: none;
+            box-shadow: 0 8px 0 #1b4f37;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .join-banner .btn-light:hover {
+            background: #c9e8c1;
+            transform: translateY(-3px);
+            box-shadow: 0 11px 0 #1b4f37;
+        }
+
+        /* footer (same as home) */
+        .footer {
+            background: var(--dark-green);
+            color: white;
+            padding: 40px 0;
+            border-top: 8px solid var(--light-green);
+        }
+
+        @media (max-width: 900px) {
+            .nav-links { display: none; flex-direction: column; width: 100%; gap: 1rem; padding: 20px 0; }
+            .nav-links.show { display: flex; }
+            .menu-toggle { display: block; }
+        }
+        @media (max-width: 600px) {
+            .page-header h1 { font-size: 2.5rem; }
+        }
+        .active-about {
+            border-bottom-color: var(--light-green) !important;
+            color: var(--dark-green) !important;
+        }
+    </style>
+</head>
+<body>
+    <!-- navigation (identical to home) -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <div class="logo-area">
+                <div class="logo-img">
+                    <span>+256<br>782<br>575<br>225</span>
+                </div>
+                <div class="logo-text">
+                    <h2>HILFS</h2>
+                    <p>charity organisation</p>
+                </div>
+            </div>
+            <div class="menu-toggle" id="menuToggle"><i class="fas fa-bars"></i></div>
+            <div class="nav-links" id="navLinks">
+                <a href="index.html">HOME</a>
+                <a href="about.html" class="active-about">ABOUT US</a>
+                <a href="activity.html">ACTIVITIES</a>
+                <a href="contact.html">CONTACT</a>
+                <a href="gallery.html">GALLERY</a>
+                <a href="blog.html">BLOG</a>
+                <a href="donate.html" class="donate-nav-btn">DONATE</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- about us page content (mission, objectives, values, founders, team) -->
+    <main>
+        <!-- page header with about -->
+        <div class="page-header">
+            <div class="container">
+                <span class="section-tag" style="color: #daf1d4;">GET TO KNOW US</span>
+                <h1>About <span class="green-highlight">HILFS</span><br> Charity Organisation</h1>
+            </div>
+        </div>
+
+        <!-- mission + vision + objectives cards -->
+        <div class="container mission-vision">
+            <div class="mv-card">
+                <i class="fas fa-bullseye"></i>
+                <h3>Our Mission</h3>
+                <p>To empower vulnerable communities through sustainable feeding, education, water, and health programs — rooted in dignity and faith.</p>
+                <ul>
+                    <li><i class="fas fa-circle-check"></i> 15+ water wells drilled</li>
+                    <li><i class="fas fa-circle-check"></i> 8,000+ monthly meals</li>
+                    <li><i class="fas fa-circle-check"></i> 6 schools built</li>
+                </ul>
+            </div>
+            <div class="mv-card">
+                <i class="fas fa-eye"></i>
+                <h3>Our Vision</h3>
+                <p>A world where every child, family, and community has access to basic necessities, education, and the warmth of compassion — regardless of background.</p>
+                <ul>
+                    <li><i class="fas fa-seedling"></i> Self‑sufficiency</li>
+                    <li><i class="fas fa-seedling"></i> Dignity for all</li>
+                </ul>
+            </div>
+            <div class="mv-card">
+                <i class="fas fa-list-check"></i>
+                <h3>Objectives</h3>
+                <ul>
+                    <li><i class="fas fa-utensils"></i> Eliminate child hunger</li>
+                    <li><i class="fas fa-mosque"></i> Build places of worship & schools</li>
+                    <li><i class="fas fa-hand-holding-water"></i> Provide clean water</li>
+                    <li><i class="fas fa-sack-dollar"></i> Distribute Zakat & Kurban effectively</li>
+                    <li><i class="fas fa-graduation-cap"></i> Sponsor education</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- core values (interactive chips) -->
+        <div class="container values-section">
+            <span class="section-tag">our compass</span>
+            <h2 class="founders-title" style="margin-top: 10px;">Values we live by</h2>
+            <div class="values-grid">
+                <div class="value-chip"><i class="fas fa-heart"></i> Compassion</div>
+                <div class="value-chip"><i class="fas fa-hand"></i> Integrity</div>
+                <div class="value-chip"><i class="fas fa-people-group"></i> Community</div>
+                <div class="value-chip"><i class="fas fa-scale-balanced"></i> Justice</div>
+                <div class="value-chip"><i class="fas fa-leaf"></i> Stewardship</div>
+                <div class="value-chip"><i class="fas fa-lightbulb"></i> Innovation</div>
+                <div class="value-chip"><i class="fas fa-globe"></i> Inclusivity</div>
+                <div class="value-chip"><i class="fas fa-hand-holding-heart"></i> Generosity</div>
+            </div>
+        </div>
+
+        <!-- founders (two visionary founders) -->
+        <div class="container">
+            <h2 class="founders-title"><i class="fas fa-crown" style="color: var(--light-green);"></i> Meet our founders</h2>
+            <div class="founders-grid">
+                <div class="founder-card">
+                    <div class="founder-img">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <h4>Yusuf K. Ssemanda</h4>
+                    <p>Co‑Founder & CEO</p>
+                    <p style="font-size: 0.9rem;">20+ years in humanitarian aid. Passionate about orphan welfare.</p>
+                    <div class="founder-social">
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-x-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="founder-card">
+                    <div class="founder-img">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <h4>Aisha Nakato</h4>
+                    <p>Co‑Founder & Director of Programs</p>
+                    <p style="font-size: 0.9rem;">Former educator, advocate for girls' education & health.</p>
+                    <div class="founder-social">
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-x-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- team section (dynamic grid) -->
+        <div class="container">
+            <h2 class="founders-title" style="margin-bottom: 10px;">Our dedicated team</h2>
+            <span class="section-tag">the people behind the mission</span>
+            <div class="team-grid">
+                <div class="team-member">
+                    <div class="member-img"><i class="fas fa-user"></i></div>
+                    <h4>Fatima Mwende</h4>
+                    <div class="role">Head of Operations</div>
+                    <div class="member-social">
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-x-twitter"></i></a>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <div class="member-img"><i class="fas fa-user"></i></div>
+                    <h4>Hassan Okello</h4>
+                    <div class="role">Field Coordinator</div>
+                    <div class="member-social">
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <div class="member-img"><i class="fas fa-user"></i></div>
+                    <h4>Naima Abdi</h4>
+                    <div class="role">Donor Relations</div>
+                    <div class="member-social">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-telegram"></i></a>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <div class="member-img"><i class="fas fa-user"></i></div>
+                    <h4>John Mugisha</h4>
+                    <div class="role">Projects Manager</div>
+                    <div class="member-social">
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-x-twitter"></i></a>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <div class="member-img"><i class="fas fa-user"></i></div>
+                    <h4>Grace Kemunto</h4>
+                    <div class="role">Volunteer Lead</div>
+                    <div class="member-social">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <div class="member-img"><i class="fas fa-user"></i></div>
+                    <h4>Mohamed Elamin</h4>
+                    <div class="role">Qurban & Zakat Officer</div>
+                    <div class="member-social">
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#"><i class="fab fa-telegram"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- join / volunteer banner -->
+        <div class="container">
+            <div class="join-banner">
+                <div>
+                    <h2>Become part of the team</h2>
+                    <p style="opacity: 0.9; font-size: 1.2rem;">Volunteer, sponsor, or collaborate.</p>
+                </div>
+                <button class="btn-light" onclick="alert('Thank you for your interest! Our volunteer coordinator will reach out. (simulated)')">JOIN US →</button>
+            </div>
+        </div>
+
+        <!-- social links same as home (but kept in about page for consistency) -->
+        <div class="container social-row" style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; margin: 20px 0 40px;">
+            <a href="#" class="social-icon" style="background: white; width: 52px; height: 52px; border-radius: 30px; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; color: var(--dark-green); box-shadow: 0 6px 0 var(--light-green);"><i class="fab fa-whatsapp"></i></a>
+            <a href="#" class="social-icon" style="background: white; width: 52px; height: 52px; border-radius: 30px; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; color: var(--dark-green); box-shadow: 0 6px 0 var(--light-green);"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social-icon" style="background: white; width: 52px; height: 52px; border-radius: 30px; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; color: var(--dark-green); box-shadow: 0 6px 0 var(--light-green);"><i class="fab fa-tiktok"></i></a>
+            <a href="#" class="social-icon" style="background: white; width: 52px; height: 52px; border-radius: 30px; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; color: var(--dark-green); box-shadow: 0 6px 0 var(--light-green);"><i class="fab fa-youtube"></i></a>
+            <a href="#" class="social-icon" style="background: white; width: 52px; height: 52px; border-radius: 30px; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; color: var(--dark-green); box-shadow: 0 6px 0 var(--light-green);"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-icon" style="background: white; width: 52px; height: 52px; border-radius: 30px; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; color: var(--dark-green); box-shadow: 0 6px 0 var(--light-green);"><i class="fab fa-x-twitter"></i></a>
+            <a href="#" class="social-icon" style="background: white; width: 52px; height: 52px; border-radius: 30px; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; color: var(--dark-green); box-shadow: 0 6px 0 var(--light-green);"><i class="fab fa-telegram-plane"></i></a>
+        </div>
+    </main>
+
+    <!-- footer -->
+    <footer class="footer">
+        <div class="container" style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center;">
+            <div style="display: flex; gap: 16px; align-items: center;">
+                <div class="logo-img" style="background: white; color: var(--dark-green); border: 3px solid var(--dark-green);">+256<br>782<br>575<br>225</div>
+                <span style="font-weight: 300;">© 2025 HILFS CHARITY — rooted in compassion</span>
+            </div>
+            <div style="display: flex; gap: 24px; color: var(--light-green);">
+                <i class="fas fa-envelope"></i>
+                <i class="fas fa-phone-alt"></i>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // mobile toggle + interactive simulation
+        const toggleBtn = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+        if (toggleBtn) {
+            toggleBtn.addEventListener('click', function() {
+                navLinks.classList.toggle('show');
+            });
+        }
+
+        // optional: interactive join us button already inline
+        // and any hover effects are pure css
+    </script>
+</body>
+</html>

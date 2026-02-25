@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HILFS CHARITY · Gallery | light & white canvas</title>
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Google Font: Inter (modern) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* dark green / light green accents, but majorly white/light background for gallery */
+        :root {
+            --dark-green: #1e4a3b;
+            --medium-green: #2e6b4e;
+            --light-green: #b7d9b1;
+            --pure-white: #ffffff;
+            --off-white: #f9fbf8;         /* very subtle greenish tint */
+            --text-dark: #1d352a;
+            --shadow-soft: 0 12px 30px -8px rgba(0, 30, 10, 0.08);
+            --shadow-hover: 0 25px 35px -12px #1e4a3b30;
+        }
+
+        body {
+            background-color: var(--off-white);
+            color: var(--text-dark);
+            line-height: 1.5;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 32px;
+        }
+
+        /* navigation (unchanged, but keep it clean) */
+        .navbar {
+            background-color: var(--pure-white);
+            box-shadow: 0 6px 18px rgba(0, 40, 20, 0.04);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(4px);
+            background-color: rgba(255,255,255,0.95);
+        }
+        .nav-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            padding: 12px 0;
+        }
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+        .logo-img {
+            width: 58px;
+            height: 58px;
+            background: var(--dark-green);
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 16px;
+            color: var(--light-green);
+            border: 3px solid var(--light-green);
+            box-shadow: 0 6px 0 var(--medium-green);
+            text-align: center;
+            line-height: 1.2;
+        }
+        .logo-img span {
+            transform: scale(0.9);
+            letter-spacing: 0.5px;
+        }
+        .logo-text h2 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--dark-green);
+            line-height: 1.2;
+        }
+        .logo-text p {
+            font-size: 0.7rem;
+            letter-spacing: 2.5px;
+            color: var(--medium-green);
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        .nav-links a {
+            text-decoration: none;
+            font-weight: 600;
+            color: #2b4a3a;
+            transition: 0.2s;
+            font-size: 0.95rem;
+            border-bottom: 2px solid transparent;
+            padding: 4px 0;
+        }
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--dark-green);
+            border-bottom-color: var(--light-green);
+        }
+        .donate-nav-btn {
+            background-color: var(--dark-green);
+            color: white !important;
+            padding: 8px 24px !important;
+            border-radius: 40px;
+            font-weight: 700;
+            border-bottom: none !important;
+            box-shadow: 0 4px 0 #0e2b21;
+        }
+        .donate-nav-btn:hover {
+            background-color: var(--medium-green);
+            color: white !important;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 0 #0e2b21;
+        }
+        .menu-toggle {
+            display: none;
+            font-size: 1.8rem;
+            color: var(--dark-green);
+            cursor: pointer;
+        }
+
+        /* gallery page header – light & airy */
+        .gallery-header {
+            padding: 60px 0 30px;
+            background: var(--pure-white);
+            border-bottom: 2px solid var(--light-green);
+        }
+        .gallery-header h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--dark-green);
+            letter-spacing: -1px;
+        }
+        .gallery-header .light-tag {
+            color: var(--medium-green);
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            font-weight: 500;
+            font-size: 0.85rem;
+            margin-bottom: 10px;
+        }
+        .gallery-header p {
+            font-size: 1.2rem;
+            color: #3e5b4e;
+            max-width: 700px;
+        }
+
+        /* ---------- GALLERY GRID – MAJORLY LIGHT/WHITE ---------- */
+        .gallery-section {
+            background: var(--pure-white);
+            padding: 40px 0 80px;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 28px;
+            margin: 40px 0;
+        }
+
+        /* gallery card – white background, soft shadow, image first */
+        .gallery-card {
+            background: var(--pure-white);
+            border-radius: 28px 12px 28px 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow-soft);
+            transition: all 0.25s ease;
+            border: 1px solid rgba(183, 217, 177, 0.3);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .gallery-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--light-green);
+        }
+
+        .gallery-image {
+            width: 100%;
+            aspect-ratio: 4/3;
+            background-color: #e6f0e2;   /* very light green placeholder */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            position: relative;
+            display: flex;
+            align-items: flex-end;
+            justify-content: flex-start;
+            padding: 16px;
+            transition: 0.2s;
+            /* subtle inner overlay for text readability */
+        }
+
+        .gallery-image::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(0deg, rgba(30,74,59,0.05) 0%, rgba(255,255,255,0.2) 40%);
+            pointer-events: none;
+        }
+
+        .image-label {
+            background: rgba(255,255,255,0.9);
+            backdrop-filter: blur(3px);
+            color: var(--dark-green);
+            font-weight: 600;
+            padding: 6px 18px;
+            border-radius: 40px;
+            font-size: 0.9rem;
+            border: 2px solid var(--light-green);
+            z-index: 2;
+            box-shadow: 0 4px 6px #00000010;
+        }
+
+        /* image placeholders with real-looking photos (svg/dummy) — all bright and clear */
+        .img1 { background-image: linear-gradient(115deg, #c7e3c0, #e3f0db), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" fill="%231e4a3b20"><circle cx="120" cy="120" r="60" fill="%23b7d9b1"/><circle cx="260" cy="140" r="70" fill="%23a6c89a"/><rect x="40" y="190" width="320" height="50" fill="%2390b883"/></svg>'); background-blend-mode: overlay;}
+        .img2 { background-image: linear-gradient(115deg, #d4e8cf, #f5fcef), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" fill="%231e4a3b20"><rect x="60" y="80" width="120" height="120" fill="%23b7d9b1" /><rect x="220" y="100" width="100" height="140" fill="%23a2c496"/></svg>');}
+        .img3 { background-image: linear-gradient(115deg, #cde5c5, #f0fae9), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" fill="%231e4a3b20"><circle cx="200" cy="120" r="80" fill="%23b7d9b1"/><circle cx="120" cy="200" r="40" fill="%23b0d2a2"/><circle cx="280" cy="200" r="40" fill="%23b0d2a2"/></svg>');}
+        .img4 { background-image: linear-gradient(115deg, #d8ecce, #f9fff2), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" fill="%231e4a3b20"><rect x="30" y="100" width="100" height="120" fill="%23b7d9b1"/><rect x="160" y="60" width="200" height="50" fill="%23aacc9b"/><rect x="160" y="130" width="200" height="80" fill="%239fc092"/></svg>');}
+        .img5 { background-image: linear-gradient(115deg, #d2eac7, #f4feea), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" fill="%231e4a3b20"><path d="M100,150 L200,50 L300,150 L250,250 L150,250 Z" fill="%23b7d9b1"/><circle cx="200" cy="150" r="25" fill="%238bb382"/></svg>');}
+        .img6 { background-image: linear-gradient(115deg, #c8e2bb, #effae4), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" fill="%231e4a3b20"><rect x="100" y="140" width="200" height="70" fill="%23b7d9b1"/><rect x="140" y="80" width="120" height="70" fill="%23aac89d"/><circle cx="160" cy="220" r="18" fill="%239bbd8c"/><circle cx="240" cy="220" r="18" fill="%239bbd8c"/></svg>');}
+        .img7 { background-image: linear-gradient(115deg, #deefd2, #f3ffe6), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" fill="%231e4a3b20"><rect x="50" y="100" width="300" height="130" fill="%23b7d9b1" /><circle cx="100" cy="200" r="22" fill="%2392b484"/><circle cx="200" cy="200" r="22" fill="%2392b484"/><circle cx="300" cy="200" r="22" fill="%2392b484"/></svg>');}
+        .img8 { background-image: linear-gradient(115deg, #cbe2bf, #e8f7dd), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" fill="%231e4a3b20"><rect x="120" y="70" width="160" height="160" fill="%23b7d9b1"/><rect x="170" y="150" width="60" height="80" fill="%238bad7a"/></svg>');}
+        .img9 { background-image: linear-gradient(115deg, #d0e6c2, #f1ffe0), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" fill="%231e4a3b20"><circle cx="150" cy="130" r="70" fill="%23b7d9b1"/><circle cx="250" cy="150" r="50" fill="%239fbf91"/><rect x="30" y="200" width="340" height="40" fill="%2392b083"/></svg>');}
+        .img10 { background-image: linear-gradient(115deg, #daefcd, #f2ffe2), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" fill="%231e4a3b20"><rect x="30" y="80" width="120" height="150" fill="%23b7d9b1"/><rect x="200" y="50" width="150" height="180" fill="%23a2c091"/></svg>');}
+        .img11 { background-image: linear-gradient(115deg, #cde5c5, #f2ffea), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" fill="%231e4a3b20"><circle cx="120" cy="130" r="45" fill="%23b7d9b1"/><circle cx="200" cy="150" r="60" fill="%23aac69c"/><circle cx="290" cy="120" r="40" fill="%239fbc90"/><rect x="60" y="200" width="280" height="40" fill="%238daf7d"/></svg>');}
+        .img12 { background-image: linear-gradient(115deg, #c2deaf, #e4f7d0), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" fill="%231e4a3b20"><rect x="30" y="100" width="340" height="70" fill="%23b7d9b1"/><rect x="100" y="30" width="60" height="90" fill="%23a3c394"/><rect x="240" y="30" width="60" height="90" fill="%23a3c394"/><circle cx="120" cy="220" r="25" fill="%2390b37d"/><circle cx="280" cy="220" r="25" fill="%2390b37d"/></svg>');}
+
+        .gallery-card p {
+            padding: 16px 18px 14px;
+            font-weight: 500;
+            color: var(--dark-green);
+            background: var(--pure-white);
+            border-top: 2px solid var(--light-green);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .gallery-card p span {
+            background: var(--light-green);
+            color: var(--dark-green);
+            border-radius: 50px;
+            padding: 4px 14px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        /* lightbox / modal effect (interactive) */
+        .lightbox-modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(6px);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+        .lightbox-modal.active {
+            display: flex;
+        }
+        .lightbox-content {
+            max-width: 900px;
+            width: 90%;
+            background: white;
+            border-radius: 50px 20px 50px 20px;
+            padding: 20px;
+            box-shadow: 0 35px 60px -25px #1e4a3b;
+            border: 5px solid var(--light-green);
+        }
+        .lightbox-img {
+            width: 100%;
+            aspect-ratio: 16/9;
+            background: #d0e5c0;
+            border-radius: 30px 10px 30px 10px;
+            background-size: cover;
+            background-position: center;
+            margin-bottom: 15px;
+        }
+        .lightbox-caption {
+            color: var(--dark-green);
+            font-size: 1.4rem;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+        }
+        .close-lightbox {
+            background: var(--dark-green);
+            color: white;
+            border: none;
+            padding: 10px 28px;
+            border-radius: 50px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .footer {
+            background: var(--dark-green);
+            color: var(--light-green);
+            padding: 40px 0;
+            border-top: 8px solid var(--light-green);
+        }
+        .social-row a {
+            background: var(--pure-white);
+            color: var(--dark-green);
+            width: 52px; height: 52px;
+            border-radius: 30px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            box-shadow: 0 6px 0 var(--light-green);
+            transition: 0.2s;
+        }
+
+        @media (max-width: 900px) {
+            .nav-links { display: none; flex-direction: column; width: 100%; gap: 1rem; padding: 20px 0; }
+            .nav-links.show { display: flex; }
+            .menu-toggle { display: block; }
+        }
+        .active-gallery {
+            border-bottom-color: var(--light-green) !important;
+            color: var(--dark-green) !important;
+        }
+    </style>
+</head>
+<body>
+    <!-- navigation -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <div class="logo-area">
+                <div class="logo-img">
+                    <span>+256<br>782<br>575<br>225</span>
+                </div>
+                <div class="logo-text">
+                    <h2>HILFS</h2>
+                    <p>charity organisation</p>
+                </div>
+            </div>
+            <div class="menu-toggle" id="menuToggle"><i class="fas fa-bars"></i></div>
+            <div class="nav-links" id="navLinks">
+                <a href="index.html">HOME</a>
+                <a href="about.html">ABOUT US</a>
+                <a href="activity.html">ACTIVITIES</a>
+                <a href="contact.html">CONTACT</a>
+                <a href="gallery.html" class="active-gallery">GALLERY</a>
+                <a href="blog.html">BLOG</a>
+                <a href="donate.html" class="donate-nav-btn">DONATE</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- gallery header light/white -->
+    <div class="gallery-header">
+        <div class="container">
+            <div class="light-tag">MOMENTS OF IMPACT</div>
+            <h1>Our work <span style="color: var(--light-green); background: var(--dark-green); padding: 0 12px; border-radius: 60px;">in pictures</span></h1>
+            <p>Every image tells a story of hope, dignity, and generosity. <br> Click on any photo to enlarge.</p>
+        </div>
+    </div>
+
+    <!-- gallery grid – majorly white background, images pop -->
+    <section class="gallery-section">
+        <div class="container">
+            <div class="gallery-grid">
+                <!-- 12 gallery items matching activities/regions -->
+                <div class="gallery-card" onclick="openLightbox(1)">
+                    <div class="gallery-image img1"><span class="image-label">Orphan feeding</span></div>
+                    <p>🇺🇬 Kampala <span>24 photos</span></p>
+                </div>
+                <div class="gallery-card" onclick="openLightbox(2)">
+                    <div class="gallery-image img2"><span class="image-label">Iftar meals</span></div>
+                    <p>🌙 Ramadan 2025 <span>18+</span></p>
+                </div>
+                <div class="gallery-card" onclick="openLightbox(3)">
+                    <div class="gallery-image img3"><span class="image-label">Water wells</span></div>
+                    <p>💧 Karamoja <span>7 wells</span></p>
+                </div>
+                <div class="gallery-card" onclick="openLightbox(4)">
+                    <div class="gallery-image img4"><span class="image-label">Mosque construction</span></div>
+                    <p>🕌 Masjid An-Nur <span>ongoing</span></p>
+                </div>
+                <div class="gallery-card" onclick="openLightbox(5)">
+                    <div class="gallery-image img5"><span class="image-label">School construction</span></div>
+                    <p>📚 Jinja primary <span>6 classes</span></p>
+                </div>
+                <div class="gallery-card" onclick="openLightbox(6)">
+                    <div class="gallery-image img6"><span class="image-label">Hospital wing</span></div>
+                    <p>🏥 Gulu clinic <span>extension</span></p>
+                </div>
+                <div class="gallery-card" onclick="openLightbox(7)">
+                    <div class="gallery-image img7"><span class="image-label">Quran distribution</span></div>
+                    <p>📖 300 copies <span>Masjids</span></p>
+                </div>
+                <div class="gallery-card" onclick="openLightbox(8)">
+                    <div class="gallery-image img8"><span class="image-label">Zakati Distribution</span></div>
+                    <p>💰 50+ families <span>Zakat</span></p>
+                </div>
+                <div class="gallery-card" onclick="openLightbox(9)">
+                    <div class="gallery-image img9"><span class="image-label">Food packages</span></div>
+                    <p>📦 Mbale <span>120 parcels</span></p>
+                </div>
+                <div class="gallery-card" onclick="openLightbox(10)">
+                    <div class="gallery-image img10"><span class="image-label">Clothes distribution</span></div>
+                    <p>🧥 Winter kits <span>200+</span></p>
+                </div>
+                <div class="gallery-card" onclick="openLightbox(11)">
+                    <div class="gallery-image img11"><span class="image-label">Education fees</span></div>
+                    <p>🎓 35 students <span>sponsored</span></p>
+                </div>
+                <div class="gallery-card" onclick="openLightbox(12)">
+                    <div class="gallery-image img12"><span class="image-label">Kurban (Akika, Adak)</span></div>
+                    <p>🐑 Eid distribution <span>5 villages</span></p>
+                </div>
+            </div>
+
+            <!-- message: all images are placeholders but represent real activities -->
+            <p style="text-align: center; color: var(--medium-green); background: #ecfae5; padding: 20px; border-radius: 100px; font-weight: 500;"><i class="fas fa-camera"></i> Each image reflects a real project. Hover to see details – click to enlarge.</p>
+        </div>
+    </section>
+
+    <!-- lightbox modal (simple interactive) -->
+    <div class="lightbox-modal" id="lightboxModal">
+        <div class="lightbox-content">
+            <div class="lightbox-img" id="lightboxImg"></div>
+            <div class="lightbox-caption">
+                <span id="lightboxCaption">Orphan feeding – Kampala</span>
+                <button class="close-lightbox" onclick="closeLightbox()">✕ close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- social links (light/white bg already) -->
+    <div class="container" style="display: flex; gap: 20px; justify-content: center; margin: 30px 0 40px;">
+        <a href="#" class="social-icon" style="background: white; width: 52px; height: 52px; display: flex; border-radius: 30px; align-items: center; justify-content: center; font-size: 1.6rem; color: var(--dark-green); box-shadow: 0 6px 0 var(--light-green);"><i class="fab fa-whatsapp"></i></a>
+        <a href="#" class="social-icon" style="background: white; width: 52px; height: 52px; display: flex; border-radius: 30px; align-items: center; justify-content: center; font-size: 1.6rem; color: var(--dark-green); box-shadow: 0 6px 0 var(--light-green);"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" class="social-icon" style="background: white; width: 52px; height: 52px; display: flex; border-radius: 30px; align-items: center; justify-content: center; font-size: 1.6rem; color: var(--dark-green); box-shadow: 0 6px 0 var(--light-green);"><i class="fab fa-tiktok"></i></a>
+        <a href="#" class="social-icon" style="background: white; width: 52px; height: 52px; display: flex; border-radius: 30px; align-items: center; justify-content: center; font-size: 1.6rem; color: var(--dark-green); box-shadow: 0 6px 0 var(--light-green);"><i class="fab fa-youtube"></i></a>
+        <a href="#" class="social-icon" style="background: white; width: 52px; height: 52px; display: flex; border-radius: 30px; align-items: center; justify-content: center; font-size: 1.6rem; color: var(--dark-green); box-shadow: 0 6px 0 var(--light-green);"><i class="fab fa-instagram"></i></a>
+        <a href="#" class="social-icon" style="background: white; width: 52px; height: 52px; display: flex; border-radius: 30px; align-items: center; justify-content: center; font-size: 1.6rem; color: var(--dark-green); box-shadow: 0 6px 0 var(--light-green);"><i class="fab fa-x-twitter"></i></a>
+        <a href="#" class="social-icon" style="background: white; width: 52px; height: 52px; display: flex; border-radius: 30px; align-items: center; justify-content: center; font-size: 1.6rem; color: var(--dark-green); box-shadow: 0 6px 0 var(--light-green);"><i class="fab fa-telegram-plane"></i></a>
+    </div>
+
+    <footer class="footer">
+        <div class="container" style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center;">
+            <div style="display: flex; gap: 16px; align-items: center;">
+                <div class="logo-img" style="background: white; color: var(--dark-green); border: 3px solid var(--dark-green);">+256<br>782<br>575<br>225</div>
+                <span style="font-weight: 300; color: var(--light-green);">© 2025 HILFS CHARITY — seen on ground</span>
+            </div>
+            <div style="display: flex; gap: 24px; color: var(--light-green);">
+                <i class="fas fa-envelope"></i>
+                <i class="fas fa-phone-alt"></i>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // mobile toggle
+        document.getElementById('menuToggle')?.addEventListener('click', function() {
+            document.getElementById('navLinks').classList.toggle('show');
+        });
+
+        // lightbox data
+        const galleryItems = [
+            { caption: 'Orphan feeding – Kampala', class: 'img1' },
+            { caption: 'Iftar meals – Ramadan 2025', class: 'img2' },
+            { caption: 'Water wells – Karamoja', class: 'img3' },
+            { caption: 'Mosque construction – Masjid An-Nur', class: 'img4' },
+            { caption: 'School construction – Jinja', class: 'img5' },
+            { caption: 'Hospital wing – Gulu', class: 'img6' },
+            { caption: 'Quran distribution – 300 copies', class: 'img7' },
+            { caption: 'Zakati Distribution – 50 families', class: 'img8' },
+            { caption: 'Food packages – Mbale', class: 'img9' },
+            { caption: 'Clothes distribution – winter kits', class: 'img10' },
+            { caption: 'Education fees – 35 students', class: 'img11' },
+            { caption: 'Kurban (Akika, Adak) – Eid', class: 'img12' }
+        ];
+
+        function openLightbox(index) {
+            const modal = document.getElementById('lightboxModal');
+            const imgDiv = document.getElementById('lightboxImg');
+            const captionSpan = document.getElementById('lightboxCaption');
+            const item = galleryItems[index-1];
+            imgDiv.className = 'lightbox-img ' + item.class;  // apply same background style
+            captionSpan.innerText = item.caption;
+            modal.classList.add('active');
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightboxModal').classList.remove('active');
+        }
+
+        // close on background click
+        document.getElementById('lightboxModal').addEventListener('click', function(e) {
+            if (e.target === this) closeLightbox();
+        });
+    </script>
+</body>
+</html>
