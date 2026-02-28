@@ -499,6 +499,26 @@
             color: var(--dark-green) !important;
             font-weight: 700;
         }
+        .logo-img {
+    width: 60px;
+    height: 60px;
+    border-radius: 16px;
+    overflow: hidden;
+    position: relative;
+    background: var(--pure-white);
+    border: 3px solid var(--light-green);
+    box-shadow: 0 6px 0 var(--medium-green);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.logo-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures image covers the area without distortion */
+    object-position: center;
+    display: block;
+}
     </style>
 </head>
 <body>
@@ -506,7 +526,8 @@
         <div class="container nav-container">
             <div class="logo-area">
                 <div class="logo-img">
-                    <span>+256<br>782<br>575<br>225</span>
+                     <img src="/Images/log_1.jpeg" alt="HILFS Charity Logo" class="logo-image">
+                    
                 </div>
                 <div class="logo-text">
                     <h2>HILFS</h2>
@@ -515,7 +536,7 @@
             </div>
             <div class="menu-toggle" id="menuToggle"><i class="fas fa-bars"></i></div>
             <div class="nav-links" id="navLinks">
-                <a href="#" class="home-active">HOME</a>
+                <a href="index.html" class="home-active">HOME</a>
                 <a href="about.html">ABOUT US</a>
                 <a href="activity.html">ACTIVITIES</a>
                 <a href="contact.html">CONTACT</a>
